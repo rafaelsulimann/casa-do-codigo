@@ -19,11 +19,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Request implements Serializable{
+public class CriarAutorRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @NotBlank(message = ErrorMessage.CAMPO_OBRIGATORIO)
+    @UniqueValue(domainClass = Autor.class, fieldName = "nome", message = "Autor já existente")
     private String nome;
     
     @NotBlank(message = ErrorMessage.CAMPO_OBRIGATORIO)

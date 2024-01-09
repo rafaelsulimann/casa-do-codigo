@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Response implements Serializable{
+public class CriarAutorResponse implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class Response implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime dataCriacao;
 
-    public Response(Autor entity) {
+    public CriarAutorResponse(Autor entity) {
         this.id = entity.getId();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
