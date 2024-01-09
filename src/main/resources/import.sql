@@ -1,9 +1,9 @@
--- INSERT INTO tb_categorias (nome) VALUES ('Dev')
--- INSERT INTO tb_categorias (nome) VALUES ('Prod')
+INSERT INTO tb_categorias (nome) VALUES ('Dev')
+INSERT INTO tb_categorias (nome) VALUES ('Prod')
 
--- INSERT INTO tb_autores (nome, email, descricao, creation_date) VALUES ('Rafael Sulimann', 'rafael@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
--- INSERT INTO tb_autores (nome, email, descricao, creation_date) VALUES ('Henrique Sulimann', 'henrique@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
--- INSERT INTO tb_autores (nome, email, descricao, creation_date) VALUES ('Luana Eloi', 'luana@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
+INSERT INTO tb_autores (nome, email, descricao, data_criacao) VALUES ('Rafael Sulimann', 'rafael@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
+INSERT INTO tb_autores (nome, email, descricao, data_criacao) VALUES ('Henrique Sulimann', 'henrique@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
+INSERT INTO tb_autores (nome, email, descricao, data_criacao) VALUES ('Luana Eloi', 'luana@gmail.com', 'teste', TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z')
 
 -- INSERT INTO tb_livros (titulo, resumo, sumario, preco, numero_paginas, isbn, data_publicacao, categoria_id, autor_id) VALUES ('O Rafael é o melhor', 'Livro que fala como o Rafael é o melhor', 'teste', 150.00, 999, 123456798, TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z', 1, 1)
 -- INSERT INTO tb_livros (titulo, resumo, sumario, preco, numero_paginas, isbn, data_publicacao, categoria_id, autor_id) VALUES ('Dev de todos', 'Porque sim', 'teste', 520.55, 753, 987654321, TIMESTAMP WITH TIME ZONE '2023-11-23T13:00:00Z', 2, 2)
