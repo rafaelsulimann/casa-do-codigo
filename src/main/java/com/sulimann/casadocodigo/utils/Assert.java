@@ -11,6 +11,12 @@ public final class Assert {
         }
     }
 
+    public static void existsObject(boolean expression, String message){
+        if(!expression){
+            throw new ResourceNotFoundException(message);
+        }
+    }
+
     private Assert() {
         throw new AssertionError("Não é permitido instanciar esta classe.");
     }
