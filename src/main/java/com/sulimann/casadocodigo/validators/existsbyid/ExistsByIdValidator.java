@@ -22,6 +22,9 @@ public class ExistsByIdValidator implements ConstraintValidator<ExistsById, Obje
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if(value == null){
+            return true;
+        }
         Query query = this.manager.createQuery("SELECT 1 FROM " + this.klass.getName() + " WHERE " + this.domainAttribute + "=:value");
         query.setParameter("value", value);
         return !query.getResultList().isEmpty();
