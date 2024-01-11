@@ -8,10 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.models.Livro;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class ObterDetalheLivroResponse implements Serializable{
 
     private static final long serialVersionUID = 1L;

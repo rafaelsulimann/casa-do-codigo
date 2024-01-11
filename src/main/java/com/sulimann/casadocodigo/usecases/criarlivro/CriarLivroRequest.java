@@ -20,10 +20,8 @@ import com.sulimann.casadocodigo.validators.existsbyid.ExistsById;
 import com.sulimann.casadocodigo.validators.uniquevalue.UniqueValue;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class CriarLivroRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;

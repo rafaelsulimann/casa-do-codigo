@@ -8,15 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.CATEGORIA)
 @Getter
-@NoArgsConstructor
 public class Categoria implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +28,7 @@ public class Categoria implements Serializable{
     private String nome;
     
     public Categoria(String nome){
+        Assert.notNull(nome, "Nome não pode ser nulo");
         this.nome = nome;
     }
 }

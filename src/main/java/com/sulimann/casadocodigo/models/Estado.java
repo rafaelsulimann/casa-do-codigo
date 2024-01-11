@@ -10,15 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.ESTADO)
 @Getter
-@NoArgsConstructor
 public class Estado implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,13 @@ public class Estado implements Serializable{
     @JoinColumn(name = "pais_id")
     private Pais pais;
 
+    @Deprecated //não usar
+    public Estado(){
+    }
+
     public Estado(String nome, Pais pais) {
+        Assert.notNull(nome, "Nome não pode ser nulo");
+        Assert.notNull(pais, "País não pode ser nulo");
         this.nome = nome;
         this.pais = pais;
     }

@@ -17,12 +17,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.COMPRA)
 @Getter
-@NoArgsConstructor
 public class Compra implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +52,17 @@ public class Compra implements Serializable{
 
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais) {
+        Assert.notNull(email, "Email não pode ser nulo");
+        Assert.notNull(nome, "Nome não pode ser nulo");
+        Assert.notNull(sobrenome, "Sobrenome não pode ser nulo");
+        Assert.notNull(documento, "Documento não pode ser nulo");
+        Assert.notNull(endereco, "Endereço não pode ser nulo");
+        Assert.notNull(complemento, "Complemento não pode ser nulo");
+        Assert.notNull(cidade, "Cidade não pode ser nulo");
+        Assert.notNull(telefone, "Telefone não pode ser nulo");
+        Assert.notNull(cep, "CEP não pode ser nulo");
+        Assert.notNull(pais, "País não pode ser nulo");
+        
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;

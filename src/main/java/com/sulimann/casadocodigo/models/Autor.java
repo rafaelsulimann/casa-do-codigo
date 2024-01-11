@@ -9,16 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.AUTOR)
 @Getter
-@NoArgsConstructor
 public class Autor implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +35,10 @@ public class Autor implements Serializable{
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Autor(String nome, String email, String descricao) {
+        Assert.notNull(nome, "Nome não pode ser nulo");
+        Assert.notNull(email, "Email não pode ser nulo");
+        Assert.notNull(descricao, "Descrição não pode ser nulo");
+        
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

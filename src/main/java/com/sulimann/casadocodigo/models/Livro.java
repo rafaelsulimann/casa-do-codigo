@@ -12,16 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.LIVRO)
 @Getter
-@NoArgsConstructor
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +50,16 @@ public class Livro implements Serializable {
 
     public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isbn,
             LocalDate dataPublicacao, Categoria categoria, Autor autor) {
+        Assert.notNull(titulo, "Título não pode ser nulo");
+        Assert.notNull(resumo, "Resumo não pode ser nulo");
+        Assert.notNull(sumario, "Sumário não pode ser nulo");
+        Assert.notNull(preco, "Preço não pode ser nulo");
+        Assert.notNull(numeroPaginas, "Número de páginas não pode ser nulo");
+        Assert.notNull(isbn, "ISBN não pode ser nulo");
+        Assert.notNull(dataPublicacao, "Data de publicação não pode ser nulo");
+        Assert.notNull(categoria, "Categoria não pode ser nulo");
+        Assert.notNull(autor, "Autor não pode ser nulo");
+        
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;

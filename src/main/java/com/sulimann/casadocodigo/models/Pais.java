@@ -12,15 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = TableName.PAIS)
 @Getter
-@NoArgsConstructor
 public class Pais implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -34,7 +34,12 @@ public class Pais implements Serializable{
     @OneToMany(mappedBy = "pais", fetch = FetchType.EAGER)
     private Set<Estado> estados = new HashSet<>();
 
+    @Deprecated //não usar
+    public Pais(){
+    }
+
     public Pais(String nome){
+        Assert.notNull(nome, "Nome não pode ser nulo");
         this.nome = nome;
     }
 

@@ -5,10 +5,8 @@ import java.io.Serializable;
 import com.sulimann.casadocodigo.models.Estado;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class CriarEstadoResponse implements Serializable{
 
     private static final long serialVersionUID = 1L;

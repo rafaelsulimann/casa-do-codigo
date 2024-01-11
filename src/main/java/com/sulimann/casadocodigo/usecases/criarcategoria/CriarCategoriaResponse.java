@@ -3,10 +3,8 @@ package com.sulimann.casadocodigo.usecases.criarcategoria;
 import com.sulimann.casadocodigo.models.Categoria;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class CriarCategoriaResponse {
 
     private Long id;

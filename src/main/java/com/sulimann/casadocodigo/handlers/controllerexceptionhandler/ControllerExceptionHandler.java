@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 
 import com.sulimann.casadocodigo.handlers.controllerexceptionhandler.exceptions.ResourceNotFoundException;
+import com.sulimann.casadocodigo.utils.ErrorMessage;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -32,6 +33,15 @@ public class ControllerExceptionHandler {
         for(FieldError f : e.getBindingResult().getFieldErrors()){
             error.addError(new FieldMessageDTO(f.getField(), f.getDefaultMessage()));
         }
+        return ResponseEntity.status(status).body(error);
+    
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<CustomErrorDTO> handleIllegalArgumentException(IllegalArgumentException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), ErrorMessage.ERRO_INTERNO, request.getRequestURI());
+        e.printStackTrace();
         return ResponseEntity.status(status).body(error);
     }
 

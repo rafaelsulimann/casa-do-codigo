@@ -17,10 +17,8 @@ import com.sulimann.casadocodigo.validators.existsbyid.ExistsById;
 import com.sulimann.casadocodigo.validators.telefone.Telefone;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class CriarCompraRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
