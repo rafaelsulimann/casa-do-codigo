@@ -16,12 +16,10 @@ import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = TableName.PAIS)
 @Getter
-@Setter
 @NoArgsConstructor
 public class Pais implements Serializable{
 

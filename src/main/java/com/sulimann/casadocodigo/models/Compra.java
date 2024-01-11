@@ -11,17 +11,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.util.Assert;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = TableName.COMPRA)
 @Getter
-@Setter
 @NoArgsConstructor
 public class Compra implements Serializable{
 
@@ -64,6 +64,12 @@ public class Compra implements Serializable{
         this.telefone = telefone;
         this.cep = cep;
         this.pais = pais;
+    }
+
+    public void setEstado(Estado estado) {
+        Assert.notNull(estado, "Estado não pode ser nulo");
+        Assert.isTrue(estado.pertenceAoPais(this.pais), "Estado informado não pertence ao país da compra");
+        this.estado = estado;
     }
 
 }

@@ -14,10 +14,8 @@ import com.sulimann.casadocodigo.validators.uniquevalue.UniqueValue;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class CriarEstadoRequest implements Serializable{
 

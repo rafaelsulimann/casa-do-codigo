@@ -14,12 +14,10 @@ import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = TableName.ESTADO)
 @Getter
-@Setter
 @NoArgsConstructor
 public class Estado implements Serializable{
 

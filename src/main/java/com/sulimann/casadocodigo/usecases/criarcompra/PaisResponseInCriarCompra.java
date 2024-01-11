@@ -6,10 +6,8 @@ import com.sulimann.casadocodigo.models.Pais;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class PaisResponseInCriarCompra implements Serializable{
 

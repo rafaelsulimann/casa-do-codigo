@@ -18,10 +18,8 @@ import com.sulimann.casadocodigo.validators.telefone.Telefone;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class CriarCompraRequest implements Serializable{
 
@@ -81,12 +79,16 @@ public class CriarCompraRequest implements Serializable{
             pais
         );
 
-        if(this.estadoId != null){
+        if(this.temEstado()){
             Estado estado = manager.find(Estado.class, this.estadoId);
             compra.setEstado(estado);
         }
 
         return compra;
+    }
+
+    public boolean temEstado() {
+        return this.estadoId != null;
     }
 
 }

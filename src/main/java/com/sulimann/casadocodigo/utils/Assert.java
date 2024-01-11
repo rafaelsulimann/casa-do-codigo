@@ -1,5 +1,7 @@
 package com.sulimann.casadocodigo.utils;
 
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import com.sulimann.casadocodigo.handlers.controllerexceptionhandler.exceptions.ResourceNotFoundException;
 
 public final class Assert {

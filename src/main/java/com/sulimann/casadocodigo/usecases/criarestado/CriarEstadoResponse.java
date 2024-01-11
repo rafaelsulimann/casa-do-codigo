@@ -6,10 +6,8 @@ import com.sulimann.casadocodigo.models.Estado;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class CriarEstadoResponse implements Serializable{
 

@@ -32,12 +32,12 @@ public class EstadoPertenceAPaisValidator implements Validator{
 
         Pais pais = this.manager.find(Pais.class, request.getPaisId());
 
-        if(pais.possuiEstados() && request.getEstadoId() == null){
+        if(pais.possuiEstados() && !request.temEstado()){
             errors.rejectValue("estadoId", null, "Este pais possui estados, favor informar um estado");
             return;
         }
 
-        if(request.getEstadoId() == null){
+        if(!request.temEstado()){
             return ;
         }
 

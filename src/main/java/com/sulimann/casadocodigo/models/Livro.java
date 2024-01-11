@@ -17,12 +17,10 @@ import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = TableName.LIVRO)
 @Getter
-@Setter
 @NoArgsConstructor
 public class Livro implements Serializable {
 

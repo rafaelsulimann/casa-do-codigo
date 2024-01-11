@@ -6,10 +6,8 @@ import com.sulimann.casadocodigo.models.Autor;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class AutorResponseInCriarLivro implements Serializable{
 
