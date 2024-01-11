@@ -35,10 +35,10 @@ public class Autor implements Serializable{
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Autor(String nome, String email, String descricao) {
-        Assert.notNull(nome, "Nome não pode ser nulo");
-        Assert.notNull(email, "Email não pode ser nulo");
-        Assert.notNull(descricao, "Descrição não pode ser nulo");
-        
+        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
+        Assert.isTrue(descricao != null && !descricao.isBlank(), "Descrição não pode ser nulo ou em branco");
+
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

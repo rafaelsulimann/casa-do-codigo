@@ -39,7 +39,7 @@ public class Pais implements Serializable{
     }
 
     public Pais(String nome){
-        Assert.notNull(nome, "Nome não pode ser nulo");
+        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         this.nome = nome;
     }
 

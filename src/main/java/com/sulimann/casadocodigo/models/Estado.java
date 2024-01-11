@@ -38,7 +38,7 @@ public class Estado implements Serializable{
     }
 
     public Estado(String nome, Pais pais) {
-        Assert.notNull(nome, "Nome não pode ser nulo");
+        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         Assert.notNull(pais, "País não pode ser nulo");
         this.nome = nome;
         this.pais = pais;

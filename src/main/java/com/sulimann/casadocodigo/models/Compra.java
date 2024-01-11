@@ -52,15 +52,15 @@ public class Compra implements Serializable{
 
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais) {
-        Assert.notNull(email, "Email não pode ser nulo");
-        Assert.notNull(nome, "Nome não pode ser nulo");
-        Assert.notNull(sobrenome, "Sobrenome não pode ser nulo");
-        Assert.notNull(documento, "Documento não pode ser nulo");
-        Assert.notNull(endereco, "Endereço não pode ser nulo");
-        Assert.notNull(complemento, "Complemento não pode ser nulo");
-        Assert.notNull(cidade, "Cidade não pode ser nulo");
-        Assert.notNull(telefone, "Telefone não pode ser nulo");
-        Assert.notNull(cep, "CEP não pode ser nulo");
+        Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
+        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(sobrenome != null && !sobrenome.isBlank(), "Sobrenome não pode ser nulo ou em branco");
+        Assert.isTrue(documento != null && !documento.isBlank(), "Documento não pode ser nulo ou em branco");
+        Assert.isTrue(endereco != null && !endereco.isBlank(), "Endereço não pode ser nulo ou em branco");
+        Assert.isTrue(complemento != null && !complemento.isBlank(), "Complemento não pode ser nulo ou em branco");
+        Assert.isTrue(cidade != null && !cidade.isBlank(), "Cidade não pode ser nulo ou em branco");
+        Assert.isTrue(telefone != null && !telefone.isBlank(), "Telefone não pode ser nulo ou em branco");
+        Assert.isTrue(cep != null && !cep.isBlank(), "CEP não pode ser nulo ou em branco");
         Assert.notNull(pais, "País não pode ser nulo");
         
         this.email = email;
