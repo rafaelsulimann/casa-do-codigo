@@ -33,8 +33,8 @@ public class ItemPedido implements Serializable{
 
     public ItemPedido(Livro livro, Integer quantidade, BigDecimal preco) {
         Assert.notNull(livro, "Livro não pode ser nulo");
-        Assert.notNull(quantidade, "Quantidade não pode ser nulo");
-        Assert.notNull(preco, "Preço não pode ser nulo");
+        Assert.isTrue(quantidade != null && quantidade > 0, "Quantidade não pode ser nulo ou menor que zero");
+        Assert.isTrue(preco != null && preco.doubleValue() > 0, "Preço não pode ser nulo ou menor que zero");
 
         this.livro = livro;
         this.quantidade = quantidade;

@@ -31,6 +31,7 @@ public class PedidoRequest implements Serializable{
     private BigDecimal total;
 
     @Valid
+    @NotNull(message = ErrorMessage.CAMPO_OBRIGATORIO)
     @NotEmpty(message = "Lista de itens precisa ter no mínimo 1 item")
     private Set<ItemPedidoRequest> itens;
 
@@ -41,7 +42,7 @@ public class PedidoRequest implements Serializable{
 
             Assert.isTrue(pedido.totalIgual(this.total), "O Valor total informado é diferente do valor calculado");
 
-            return new Pedido(itensPedido, compra);
+            return pedido;
         };
     }
 

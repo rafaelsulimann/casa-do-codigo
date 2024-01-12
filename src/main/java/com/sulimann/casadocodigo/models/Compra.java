@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sulimann.casadocodigo.utils.Regex;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
@@ -59,15 +60,15 @@ public class Compra implements Serializable{
 
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais, Function<Compra, Pedido> pedido) {
-        Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
+        Assert.isTrue(email != null && !email.isBlank() && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco");
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         Assert.isTrue(sobrenome != null && !sobrenome.isBlank(), "Sobrenome não pode ser nulo ou em branco");
-        Assert.isTrue(documento != null && !documento.isBlank(), "Documento não pode ser nulo ou em branco");
+        Assert.isTrue(documento != null && !documento.isBlank() && documento.matches(Regex.CPF_OU_CNPJ), "Documento não pode ser nulo ou em branco e precisa ser um documento válido");
         Assert.isTrue(endereco != null && !endereco.isBlank(), "Endereço não pode ser nulo ou em branco");
         Assert.isTrue(complemento != null && !complemento.isBlank(), "Complemento não pode ser nulo ou em branco");
         Assert.isTrue(cidade != null && !cidade.isBlank(), "Cidade não pode ser nulo ou em branco");
-        Assert.isTrue(telefone != null && !telefone.isBlank(), "Telefone não pode ser nulo ou em branco");
-        Assert.isTrue(cep != null && !cep.isBlank(), "CEP não pode ser nulo ou em branco");
+        Assert.isTrue(telefone != null && !telefone.isBlank() && telefone.matches(Regex.CELULAR), "Telefone não pode ser nulo ou em branco e precisa ser um telefone válido");
+        Assert.isTrue(cep != null && !cep.isBlank() && cep.matches(Regex.CEP), "CEP não pode ser nulo ou em branco e precisa ser um cep válido");
         Assert.notNull(pais, "País não pode ser nulo");
         Assert.notNull(pedido, "Pedido não pode ser nulo");
         

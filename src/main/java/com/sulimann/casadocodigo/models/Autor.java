@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sulimann.casadocodigo.utils.Regex;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
@@ -45,7 +46,7 @@ public class Autor implements Serializable{
 
     public Autor(String nome, String email, String descricao) {
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
-        Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
+        Assert.isTrue(email != null && !email.isBlank() && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco e precisa ser um email válido");
         Assert.isTrue(descricao != null && !descricao.isBlank(), "Descrição não pode ser nulo ou em branco");
 
         this.nome = nome;

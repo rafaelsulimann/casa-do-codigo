@@ -62,10 +62,10 @@ public class Livro implements Serializable {
         Assert.isTrue(titulo != null && !titulo.isBlank(), "Título não pode ser nulo ou em branco");
         Assert.isTrue(resumo != null && !resumo.isBlank(), "Resumo não pode ser nulo ou em branco");
         Assert.isTrue(sumario != null && !sumario.isBlank(), "Sumário não pode ser nulo ou em branco");
-        Assert.notNull(preco, "Preço não pode ser nulo");
-        Assert.notNull(numeroPaginas, "Número de páginas não pode ser nulo");
+        Assert.isTrue(preco != null && preco.doubleValue() > 0, "Preço não pode ser nulo e ser menor que zero");
+        Assert.isTrue(numeroPaginas != null && numeroPaginas > 0, "Número de páginas não pode ser nulo e ser menor que zero");
         Assert.isTrue(isbn != null && !isbn.isBlank(), "ISBN não pode ser nulo ou em branco");
-        Assert.notNull(dataPublicacao, "Data de publicação não pode ser nulo");
+        Assert.isTrue(dataPublicacao != null && dataPublicacao.isAfter(LocalDate.now()), "Data de publicação não pode ser nulo e preciser ser no futuro");
         Assert.notNull(categoria, "Categoria não pode ser nulo");
         Assert.notNull(autor, "Autor não pode ser nulo");
         

@@ -65,6 +65,7 @@ public class CriarCompraRequest implements Serializable{
     private Long estadoId;
 
     @Valid
+    @NotNull(message = ErrorMessage.CAMPO_OBRIGATORIO)
     private PedidoRequest pedido;
 
     public Compra toModel(EntityManager manager) {
