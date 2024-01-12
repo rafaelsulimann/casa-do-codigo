@@ -9,6 +9,7 @@ public final class TableName {
     public static final String ESTADO = "tb_estados";
     public static final String COMPRA = "tb_compras";
     public static final String PEDIDO = "tb_pedidos";
+    public static final String CUPOM_DESCONTO = "tb_cupons_descontos";
 
     private TableName() {
         throw new AssertionError("Não é permitido instanciar esta classe.");
