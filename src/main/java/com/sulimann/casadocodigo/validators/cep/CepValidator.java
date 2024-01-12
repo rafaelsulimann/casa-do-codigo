@@ -5,9 +5,11 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.sulimann.casadocodigo.utils.Regex;
+
 public class CepValidator implements ConstraintValidator<Cep, String>{
 
-    private final Pattern pattern = Pattern.compile("^\\d{8}$");
+    private final Pattern pattern = Pattern.compile(Regex.CEP);
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
