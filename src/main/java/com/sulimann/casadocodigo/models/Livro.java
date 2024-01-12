@@ -48,6 +48,15 @@ public class Livro implements Serializable {
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
+    /**
+     * @Deprecated
+     * Não utilizar!
+     * Criado apenas por obrigação do hibernate
+     */
+    @Deprecated
+    public Livro(){
+    }
+
     public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isbn,
             LocalDate dataPublicacao, Categoria categoria, Autor autor) {
         Assert.isTrue(titulo != null && !titulo.isBlank(), "Título não pode ser nulo ou em branco");

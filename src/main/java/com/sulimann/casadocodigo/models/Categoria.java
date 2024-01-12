@@ -26,6 +26,15 @@ public class Categoria implements Serializable{
     private Long id;
 
     private String nome;
+
+    /**
+     * @Deprecated
+     * Não utilizar!
+     * Criado apenas por obrigação do hibernate
+     */
+    @Deprecated
+    public Categoria(){
+    }
     
     public Categoria(String nome){
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");

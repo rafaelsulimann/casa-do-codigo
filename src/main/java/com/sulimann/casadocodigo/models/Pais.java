@@ -34,7 +34,12 @@ public class Pais implements Serializable{
     @OneToMany(mappedBy = "pais", fetch = FetchType.EAGER)
     private Set<Estado> estados = new HashSet<>();
 
-    @Deprecated //não usar
+    /**
+     * @Deprecated
+     * Não utilizar!
+     * Criado apenas para atender exigencias do hibernate
+     */
+    @Deprecated 
     public Pais(){
     }
 

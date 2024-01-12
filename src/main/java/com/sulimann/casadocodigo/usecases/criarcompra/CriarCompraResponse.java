@@ -31,6 +31,7 @@ public class CriarCompraResponse implements Serializable{
 
     private PaisResponseInCriarCompra pais;
     private EstadoResponseInCriarCompra estado;
+    private PedidoResponseInCriarCompra pedido;
 
     public CriarCompraResponse(Compra entity) {
         this.id = entity.getId();
@@ -46,6 +47,7 @@ public class CriarCompraResponse implements Serializable{
         this.dataCompra = entity.getDataCompra();
         this.pais = new PaisResponseInCriarCompra(entity.getPais());
         this.estado = entity.getEstado() != null ? new EstadoResponseInCriarCompra(entity.getEstado()) : null;
+        this.pedido = new PedidoResponseInCriarCompra(entity.getPedido());
     }
 
 }

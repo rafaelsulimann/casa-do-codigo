@@ -33,7 +33,12 @@ public class Estado implements Serializable{
     @JoinColumn(name = "pais_id")
     private Pais pais;
 
-    @Deprecated //não usar
+    /**
+     * @Deprecated
+     * Não utilizar!
+     * Criado apenas para atender exigencias do hibernate
+     */
+    @Deprecated
     public Estado(){
     }
 

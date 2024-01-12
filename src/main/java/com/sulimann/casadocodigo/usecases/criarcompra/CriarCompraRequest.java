@@ -1,8 +1,10 @@
 package com.sulimann.casadocodigo.usecases.criarcompra;
 
 import java.io.Serializable;
+import java.util.function.Function;
 
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.sulimann.casadocodigo.models.Compra;
 import com.sulimann.casadocodigo.models.Estado;
 import com.sulimann.casadocodigo.models.Pais;
+import com.sulimann.casadocodigo.models.Pedido;
 import com.sulimann.casadocodigo.utils.ErrorMessage;
 import com.sulimann.casadocodigo.validators.cep.Cep;
 import com.sulimann.casadocodigo.validators.cpforcnpj.CpfOrCnpj;
@@ -61,8 +64,13 @@ public class CriarCompraRequest implements Serializable{
     @ExistsById(domainClass = Estado.class, fieldName = "id", message = "Estado não encontrado")
     private Long estadoId;
 
+    @Valid
+    private PedidoRequest pedido;
+
     public Compra toModel(EntityManager manager) {
         Pais pais = manager.find(Pais.class, this.paisId);
+
+        Function<Compra, Pedido> criaPedido = this.pedido.toModel(manager);
 
         Compra compra = new Compra(
             this.email, 
@@ -74,7 +82,8 @@ public class CriarCompraRequest implements Serializable{
             this.cidade, 
             this.telefone, 
             this.cep, 
-            pais
+            pais,
+            criaPedido
         );
 
         if(this.temEstado()){

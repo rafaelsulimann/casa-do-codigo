@@ -2,13 +2,16 @@ package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
@@ -19,6 +22,7 @@ import com.sulimann.casadocodigo.utils.TableName;
 import lombok.Getter;
 
 @Entity
+
 @Table(name = TableName.COMPRA)
 @Getter
 public class Compra implements Serializable{
@@ -50,8 +54,11 @@ public class Compra implements Serializable{
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
+    @OneToOne(mappedBy="compra", cascade = CascadeType.ALL)
+    private Pedido pedido;    
+
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
-            String cidade, String telefone, String cep, Pais pais) {
+            String cidade, String telefone, String cep, Pais pais, Function<Compra, Pedido> pedido) {
         Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         Assert.isTrue(sobrenome != null && !sobrenome.isBlank(), "Sobrenome não pode ser nulo ou em branco");
@@ -62,6 +69,7 @@ public class Compra implements Serializable{
         Assert.isTrue(telefone != null && !telefone.isBlank(), "Telefone não pode ser nulo ou em branco");
         Assert.isTrue(cep != null && !cep.isBlank(), "CEP não pode ser nulo ou em branco");
         Assert.notNull(pais, "País não pode ser nulo");
+        Assert.notNull(pedido, "Pedido não pode ser nulo");
         
         this.email = email;
         this.nome = nome;
@@ -73,6 +81,7 @@ public class Compra implements Serializable{
         this.telefone = telefone;
         this.cep = cep;
         this.pais = pais;
+        this.pedido = pedido.apply(this);
     }
 
     public void setEstado(Estado estado) {

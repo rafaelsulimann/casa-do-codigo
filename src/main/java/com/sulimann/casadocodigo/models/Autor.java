@@ -34,6 +34,15 @@ public class Autor implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
+    /**
+     * @Depecreated
+     * Não utilizar!
+     * Criado apenas pro obrigação do hibernate
+     */
+    @Deprecated
+    public Autor(){
+    }
+
     public Autor(String nome, String email, String descricao) {
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         Assert.isTrue(email != null && !email.isBlank(), "Email não pode ser nulo ou em branco");
