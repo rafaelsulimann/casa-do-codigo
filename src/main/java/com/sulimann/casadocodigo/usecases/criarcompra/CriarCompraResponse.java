@@ -29,8 +29,9 @@ public class CriarCompraResponse implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime dataCompra;
 
-    private PaisResponseInCriarCompra pais;
-    private EstadoResponseInCriarCompra estado;
+    private String pais;
+    private String estado;
+    private CupomDescontoAplicadoResponseInCriarCompra cupom;
     private PedidoResponseInCriarCompra pedido;
 
     public CriarCompraResponse(Compra entity) {
@@ -45,8 +46,9 @@ public class CriarCompraResponse implements Serializable{
         this.telefone = entity.getTelefone();
         this.cep = entity.getCep();
         this.dataCompra = entity.getDataCompra();
-        this.pais = new PaisResponseInCriarCompra(entity.getPais());
-        this.estado = entity.getEstado() != null ? new EstadoResponseInCriarCompra(entity.getEstado()) : null;
+        this.pais = entity.getPais().getNome();
+        this.estado = entity.getEstado() != null ? entity.getEstado().getNome() : null;
+        this.cupom = entity.getCupom() != null ? new CupomDescontoAplicadoResponseInCriarCompra(entity.getCupom()) : null;
         this.pedido = new PedidoResponseInCriarCompra(entity.getPedido());
     }
 

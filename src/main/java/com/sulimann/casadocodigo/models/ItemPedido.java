@@ -42,7 +42,7 @@ public class ItemPedido implements Serializable{
         this.subTotal = this.obterSubTotal();
     }
 
-    private BigDecimal obterSubTotal() {
+    public BigDecimal obterSubTotal() {
         return this.preco.multiply(new BigDecimal(this.quantidade));
     }
 

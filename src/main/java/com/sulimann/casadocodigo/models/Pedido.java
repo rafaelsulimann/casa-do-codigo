@@ -54,4 +54,8 @@ public class Pedido implements Serializable {
         return this.total.equals(totalInformado);
     }
 
+    public void aplicaDesconto(CupomDescontoAplicado cupom){
+        this.total = this.total.subtract(this.total.multiply(cupom.getPercentual().divide(new BigDecimal(100))));
+    }
+
 }

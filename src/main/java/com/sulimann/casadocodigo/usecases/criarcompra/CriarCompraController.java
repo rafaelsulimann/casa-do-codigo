@@ -29,16 +29,21 @@ public class CriarCompraController {
     private EntityManager manager;
 
     private final EstadoPertenceAPaisValidator estadoPertencePaisValidator;
+    private final CupomDescontoEstaNaValidadeValidator cupomDescontoEstaNaValididaValidator;
+    private final CupomDescontoRepository cupomDescontoRepository;
+    private final TotalInformadoIgualAoCalculadoValidator totalInformadoIgualAoCalculadoValidator;
 
     @InitBinder
     public void init(WebDataBinder binder){
         binder.addValidators(estadoPertencePaisValidator);
+        binder.addValidators(cupomDescontoEstaNaValididaValidator);
+        binder.addValidators(totalInformadoIgualAoCalculadoValidator);
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity<CriarCompraResponse> criarCompra(@RequestBody @Valid CriarCompraRequest request) {
-        Compra compra = request.toModel(this.manager);
+        Compra compra = request.toModel(this.manager, cupomDescontoRepository);
         this.manager.persist(compra);
         return ResponseEntity.status(HttpStatus.CREATED).body(new CriarCompraResponse(compra));
     }

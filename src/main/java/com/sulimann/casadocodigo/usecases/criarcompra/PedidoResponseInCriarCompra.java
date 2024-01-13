@@ -18,7 +18,7 @@ public class PedidoResponseInCriarCompra implements Serializable{
     private Set<ItemPedidoResponseInCriarCompra> itens;
 
     public PedidoResponseInCriarCompra(Pedido entity) {
-        this.total = entity.getTotal();
+        this.total = entity.getTotal().setScale(2);
         this.itens = entity.getItens().stream().map(ItemPedidoResponseInCriarCompra::new).collect(Collectors.toSet());
 
     }

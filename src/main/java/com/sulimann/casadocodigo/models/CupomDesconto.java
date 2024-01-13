@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.springframework.util.Assert;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
 
 import lombok.Getter;
@@ -29,7 +30,18 @@ public class CupomDesconto implements Serializable{
 
     private String codigo;
     private BigDecimal percentual;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate validade;
+
+    /**
+     * @deprecated
+     * Não utilizar!
+     * Criado apenas por obrigação do hibernate
+     */
+    @Deprecated
+    public CupomDesconto(){
+    }
 
     public CupomDesconto(String codigo, BigDecimal percentual, LocalDate validade) {
         Assert.isTrue(codigo != null && !codigo.isBlank(), "Código não poder ser nulo ou em branco");

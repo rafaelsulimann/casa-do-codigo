@@ -38,15 +38,12 @@ public class PedidoRequest implements Serializable{
     public Function<Compra, Pedido> toModel(EntityManager manager) {
         return compra -> {
             Set<ItemPedido> itensPedido = this.montaItensPedido(manager);
-            Pedido pedido = new Pedido(itensPedido, compra);
-
-            Assert.isTrue(pedido.totalIgual(this.total), "O Valor total informado é diferente do valor calculado");
-
-            return pedido;
+            return new Pedido(itensPedido, compra);
         };
     }
 
-    private Set<ItemPedido> montaItensPedido(EntityManager manager) {
+    public Set<ItemPedido> montaItensPedido(EntityManager manager) {
+        Assert.isTrue(manager != null, "Manager não pode ser nulo");
         return this.itens.stream().map(item -> item.toModel(manager)).collect(Collectors.toSet());
     }
 

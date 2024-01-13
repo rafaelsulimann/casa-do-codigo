@@ -12,7 +12,7 @@ INSERT INTO tb_livros (titulo, resumo, sumario, preco, numero_paginas, isbn, dat
 INSERT INTO tb_paises (nome) VALUES ('Brasil')
 INSERT INTO tb_paises (nome) VALUES ('Estados Unidos')
 
--- INSERT INTO tb_cupons_descontos (nome, percentual_desconto, validade) VALUES ('TESTE20', 20, TIMESTAMP WITH TIME ZONE '2024-01-08T23:59:00Z')
+INSERT INTO tb_cupons_descontos (codigo, percentual, validade) VALUES ('TESTE20', 20, TIMESTAMP WITH TIME ZONE '2024-01-15')
 
 INSERT INTO tb_estados (nome, pais_id) VALUES ('Rio Grande do Sul', 1)
 INSERT INTO tb_estados (nome, pais_id) VALUES ('Santa Catarina', 1)

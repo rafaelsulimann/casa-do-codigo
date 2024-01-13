@@ -1,11 +1,14 @@
 package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +26,6 @@ import com.sulimann.casadocodigo.utils.TableName;
 import lombok.Getter;
 
 @Entity
-
 @Table(name = TableName.COMPRA)
 @Getter
 public class Compra implements Serializable{
@@ -58,6 +60,9 @@ public class Compra implements Serializable{
     @OneToOne(mappedBy="compra", cascade = CascadeType.ALL)
     private Pedido pedido;    
 
+    @Embedded
+    private CupomDescontoAplicado cupom;
+
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais, Function<Compra, Pedido> pedido) {
         Assert.isTrue(email != null && !email.isBlank() && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco");
@@ -89,6 +94,13 @@ public class Compra implements Serializable{
         Assert.notNull(estado, "Estado não pode ser nulo");
         Assert.isTrue(estado.pertenceAoPais(this.pais), "Estado informado não pertence ao país da compra");
         this.estado = estado;
+    }
+
+    public void aplicaCupomDesconto(CupomDesconto cupomEntity) {
+        Assert.isTrue(cupomEntity != null && cupomEntity.getValidade().compareTo(LocalDate.now()) >= 0, "Cupom de desconto não pode ser nulo e validade precisa ser no futuro");
+        Assert.isTrue(this.cupom == null, "Não é possível aplicar um cupom de desconto em uma compra que ja foi efetuada");
+        this.cupom = new CupomDescontoAplicado(cupomEntity);
+        this.pedido.aplicaDesconto(cupom);
     }
 
 }

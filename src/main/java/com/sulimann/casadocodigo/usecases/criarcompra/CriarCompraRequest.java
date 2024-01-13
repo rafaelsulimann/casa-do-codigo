@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.sulimann.casadocodigo.models.Compra;
+import com.sulimann.casadocodigo.models.CupomDesconto;
 import com.sulimann.casadocodigo.models.Estado;
 import com.sulimann.casadocodigo.models.Pais;
 import com.sulimann.casadocodigo.models.Pedido;
@@ -64,11 +65,15 @@ public class CriarCompraRequest implements Serializable{
     @ExistsById(domainClass = Estado.class, fieldName = "id", message = "Estado não encontrado")
     private Long estadoId;
 
+    @ExistsById(domainClass = CupomDesconto.class, fieldName = "codigo", message = "Cupom de desconto não encontrado")
+    private String codigoCupom;
+    
     @Valid
     @NotNull(message = ErrorMessage.CAMPO_OBRIGATORIO)
     private PedidoRequest pedido;
 
-    public Compra toModel(EntityManager manager) {
+
+    public Compra toModel(EntityManager manager, CupomDescontoRepository cupomDescontoRepository) {
         Pais pais = manager.find(Pais.class, this.paisId);
 
         Function<Compra, Pedido> criaPedido = this.pedido.toModel(manager);
@@ -92,11 +97,20 @@ public class CriarCompraRequest implements Serializable{
             compra.setEstado(estado);
         }
 
+        if(this.possuiCupomDesconto()){
+            CupomDesconto cupom = cupomDescontoRepository.findByCodigo(this.codigoCupom);
+            compra.aplicaCupomDesconto(cupom);
+        }
+
         return compra;
     }
 
     public boolean temEstado() {
         return this.estadoId != null;
+    }
+
+    public boolean possuiCupomDesconto() {
+        return this.codigoCupom != null;
     }
 
 }
