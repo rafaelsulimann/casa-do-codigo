@@ -32,7 +32,7 @@ public class CupomDescontoEstaNaValidadeValidator implements Validator{
         if(request.possuiCupomDesconto()){
             CupomDesconto cupom = this.cupomDescontoRepository.findByCodigo(request.getCodigoCupom());
 
-            if(cupom.getValidade().compareTo(LocalDate.now()) <= 0){
+            if(cupom.isValido()){
                 errors.rejectValue("codigoCupom", null, "Cupom de desconto não está mais válido");
             }
         }

@@ -40,4 +40,5 @@ public class Categoria implements Serializable{
         Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
         this.nome = nome;
     }
+    
 }

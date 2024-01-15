@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +32,20 @@ public class Pedido implements Serializable {
 
     private BigDecimal total;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<ItemPedido> itens;
 
     @OneToOne
     private Compra compra;
+
+    /**
+     * @deprecated
+     * Não utilizar!
+     * Criado apenas por obrigação do hibernate
+     */
+    @Deprecated
+    public Pedido(){
+    }
 
     public Pedido(Set<ItemPedido> itens, Compra compra) {
         Assert.isTrue(!itens.isEmpty(), "Lista de Itens não pode ser vazia");

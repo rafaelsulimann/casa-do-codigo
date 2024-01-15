@@ -37,7 +37,7 @@ public class CupomDescontoAplicado implements Serializable{
         Assert.isTrue(entity != null && entity.getPercentual() != null && entity.getValidade() != null, "Cupom de desconto não pode ser nulo");
         Assert.isTrue(entity.getCodigo() != null, "Código não pode ser nulo");
         Assert.isTrue(entity.getPercentual().doubleValue() > 0, "Percentual de desconto não pode ser nulo e precisa ser maior que zero");
-        Assert.isTrue(entity.getValidade().compareTo(LocalDate.now()) >= 0, "Valida precisa ser no futuro");
+        // Assert.isTrue(entity.getValidade().compareTo(LocalDate.now()) >= 0, "Valida precisa ser no futuro");
 
         this.cupom = entity;
         this.codigo = entity.getCodigo();

@@ -17,8 +17,6 @@ public class TelefoneValidator implements ConstraintValidator<Telefone, String>{
         return value.matches(Regex.CELULAR);
     }
 
-    
-
 }
 
 

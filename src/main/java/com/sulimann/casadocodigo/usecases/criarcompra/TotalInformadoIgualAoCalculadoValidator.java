@@ -38,18 +38,30 @@ public class TotalInformadoIgualAoCalculadoValidator implements Validator{
 
         if(request.possuiCupomDesconto()){
             CupomDesconto cupom = this.cupomDescontoRepository.findByCodigo(request.getCodigoCupom());
-            BigDecimal totalSemDesconto = request.getPedido().montaItensPedido(manager).stream().map(ItemPedido::getSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-            BigDecimal totalComCupomDeDesconto = totalSemDesconto.subtract(totalSemDesconto.multiply(cupom.getPercentual().divide(new BigDecimal(100))));
-            if(totalComCupomDeDesconto.doubleValue() != request.getPedido().getTotal().doubleValue()){
+            BigDecimal totalSemDesconto = this.obterTotalSemDesconto(request.getPedido(), this.manager);
+            BigDecimal totalComCupomDeDesconto = this.aplicaDesconto(cupom, totalSemDesconto);
+            if(this.totalIgual(request.getPedido().getTotal(), totalComCupomDeDesconto)){
                 errors.rejectValue("pedido.total", null, "Total informado é diferente do total calculado");
             }
             return;
         }
 
-        BigDecimal totalSemDesconto = request.getPedido().montaItensPedido(manager).stream().map(ItemPedido::getSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-        if(totalSemDesconto.doubleValue() != request.getPedido().getTotal().doubleValue()){
+        BigDecimal totalSemDesconto = this.obterTotalSemDesconto(request.getPedido(), this.manager);
+        if(this.totalIgual(request.getPedido().getTotal(), totalSemDesconto)){
             errors.rejectValue("pedido.total", null, "Total informado é diferente do total calculado");
         }
+    }
+
+    private boolean totalIgual(BigDecimal totalInformado, BigDecimal totalCalculado) {
+        return totalCalculado.doubleValue() != totalInformado.doubleValue();
+    }
+
+    private BigDecimal aplicaDesconto(CupomDesconto cupom, BigDecimal totalSemDesconto) {
+        return totalSemDesconto.subtract(totalSemDesconto.multiply(cupom.getPercentual().divide(new BigDecimal(100))));
+    }
+
+    private BigDecimal obterTotalSemDesconto(PedidoRequest pedido, EntityManager manager) {
+        return pedido.montaItensPedido(manager).stream().map(ItemPedido::getSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

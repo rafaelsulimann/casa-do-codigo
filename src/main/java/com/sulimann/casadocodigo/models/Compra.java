@@ -8,7 +8,6 @@ import java.util.function.Function;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,6 +62,15 @@ public class Compra implements Serializable{
     @Embedded
     private CupomDescontoAplicado cupom;
 
+    /**
+     * @deprecated
+     * Não utilizar!
+     * Criado apenas por obrigação do hibernate
+     */
+    @Deprecated
+    public Compra(){
+    }
+
     public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais, Function<Compra, Pedido> pedido) {
         Assert.isTrue(email != null && !email.isBlank() && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco");
@@ -97,7 +105,7 @@ public class Compra implements Serializable{
     }
 
     public void aplicaCupomDesconto(CupomDesconto cupomEntity) {
-        Assert.isTrue(cupomEntity != null && cupomEntity.getValidade().compareTo(LocalDate.now()) >= 0, "Cupom de desconto não pode ser nulo e validade precisa ser no futuro");
+        Assert.isTrue(cupomEntity != null && cupomEntity.getValidade().atTime(00, 01).compareTo(LocalDate.now().atTime(00, 00)) >= 0, "Cupom de desconto não pode ser nulo e validade precisa ser no futuro");
         Assert.isTrue(this.cupom == null, "Não é possível aplicar um cupom de desconto em uma compra que ja foi efetuada");
         this.cupom = new CupomDescontoAplicado(cupomEntity);
         this.pedido.aplicaDesconto(cupom);
