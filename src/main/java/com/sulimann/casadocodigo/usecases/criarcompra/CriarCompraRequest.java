@@ -1,7 +1,7 @@
 package com.sulimann.casadocodigo.usecases.criarcompra;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.function.Function;
 
 import javax.persistence.EntityManager;
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import com.sulimann.casadocodigo.models.Compra;
 import com.sulimann.casadocodigo.models.CupomDesconto;
 import com.sulimann.casadocodigo.models.Estado;
-import com.sulimann.casadocodigo.models.ItemPedido;
 import com.sulimann.casadocodigo.models.Pais;
 import com.sulimann.casadocodigo.models.Pedido;
 import com.sulimann.casadocodigo.utils.ErrorMessage;
@@ -108,11 +107,11 @@ public class CriarCompraRequest implements Serializable{
     }
 
     public boolean temEstado() {
-        return this.estadoId != null;
+        return Objects.nonNull(this.estadoId);
     }
 
     public boolean possuiCupomDesconto() {
-        return this.codigoCupom != null;
+        return Objects.nonNull(this.codigoCupom);
     }
 
 }

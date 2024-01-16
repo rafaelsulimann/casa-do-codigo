@@ -2,6 +2,7 @@ package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.Regex;
@@ -45,9 +47,9 @@ public class Autor implements Serializable{
     }
 
     public Autor(String nome, String email, String descricao) {
-        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
-        Assert.isTrue(email != null && !email.isBlank() && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco e precisa ser um email válido");
-        Assert.isTrue(descricao != null && !descricao.isBlank(), "Descrição não pode ser nulo ou em branco");
+        Assert.isTrue(Objects.nonNull(nome) && StringUtils.hasText(nome), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(Objects.nonNull(email) && StringUtils.hasText(email) && email.matches(Regex.EMAIL), "Email não pode ser nulo ou em branco e precisa ser um email válido");
+        Assert.isTrue(Objects.nonNull(descricao) && StringUtils.hasText(descricao), "Descrição não pode ser nulo ou em branco");
 
         this.nome = nome;
         this.email = email;

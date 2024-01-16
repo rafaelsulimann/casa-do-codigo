@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.sulimann.casadocodigo.utils.TableName;
 
@@ -44,7 +45,7 @@ public class Pais implements Serializable{
     }
 
     public Pais(String nome){
-        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(StringUtils.hasText(nome), "Nome não pode ser nulo ou em branco");
         this.nome = nome;
     }
 

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.sulimann.casadocodigo.utils.TableName;
 
@@ -43,7 +44,7 @@ public class Estado implements Serializable{
     }
 
     public Estado(String nome, Pais pais) {
-        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(StringUtils.hasText(nome), "Nome não pode ser nulo ou em branco");
         Assert.notNull(pais, "País não pode ser nulo");
         this.nome = nome;
         this.pais = pais;

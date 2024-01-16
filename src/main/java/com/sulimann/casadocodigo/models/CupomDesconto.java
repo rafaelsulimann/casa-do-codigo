@@ -3,6 +3,7 @@ package com.sulimann.casadocodigo.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
@@ -44,9 +46,9 @@ public class CupomDesconto implements Serializable{
     }
 
     public CupomDesconto(String codigo, BigDecimal percentual, LocalDate validade) {
-        Assert.isTrue(codigo != null && !codigo.isBlank(), "Código não poder ser nulo ou em branco");
-        Assert.isTrue(percentual != null && percentual.doubleValue() > 0, "Percentual não pode ser nulo ou menor que zero");
-        Assert.isTrue(validade != null && validade.compareTo(LocalDate.now()) >= 0, "Validade não pode ser nulo e precisa ser no futuro");
+        Assert.isTrue(StringUtils.hasText(codigo), "Código não poder ser nulo ou em branco");
+        Assert.isTrue(Objects.nonNull(percentual) && percentual.doubleValue() > 0, "Percentual não pode ser nulo ou menor que zero");
+        Assert.isTrue(Objects.nonNull(validade) && validade.compareTo(LocalDate.now()) >= 0, "Validade não pode ser nulo e precisa ser no futuro");
 
         this.codigo = codigo;
         this.percentual = percentual;

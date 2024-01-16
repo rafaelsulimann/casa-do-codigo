@@ -2,6 +2,7 @@ package com.sulimann.casadocodigo.usecases.criarcompra;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,6 +37,7 @@ public class PedidoRequest implements Serializable{
     private Set<ItemPedidoRequest> itens;
 
     public Function<Compra, Pedido> toModel(EntityManager manager) {
+        Assert.isTrue(Objects.nonNull(manager), "Manager não pode ser nulo");
         return compra -> {
             Set<ItemPedido> itensPedido = this.montaItensPedido(manager);
             return new Pedido(itensPedido, compra);
@@ -43,7 +45,7 @@ public class PedidoRequest implements Serializable{
     }
 
     public Set<ItemPedido> montaItensPedido(EntityManager manager) {
-        Assert.isTrue(manager != null, "Manager não pode ser nulo");
+        Assert.isTrue(Objects.nonNull(manager), "Manager não pode ser nulo");
         return this.itens.stream().map(item -> item.toModel(manager)).collect(Collectors.toSet());
     }
 

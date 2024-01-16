@@ -3,6 +3,7 @@ package com.sulimann.casadocodigo.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.utils.TableName;
@@ -59,13 +61,13 @@ public class Livro implements Serializable {
 
     public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isbn,
             LocalDate dataPublicacao, Categoria categoria, Autor autor) {
-        Assert.isTrue(titulo != null && !titulo.isBlank(), "Título não pode ser nulo ou em branco");
-        Assert.isTrue(resumo != null && !resumo.isBlank(), "Resumo não pode ser nulo ou em branco");
-        Assert.isTrue(sumario != null && !sumario.isBlank(), "Sumário não pode ser nulo ou em branco");
-        Assert.isTrue(preco != null && preco.doubleValue() > 0, "Preço não pode ser nulo e ser menor que zero");
-        Assert.isTrue(numeroPaginas != null && numeroPaginas > 0, "Número de páginas não pode ser nulo e ser menor que zero");
-        Assert.isTrue(isbn != null && !isbn.isBlank(), "ISBN não pode ser nulo ou em branco");
-        Assert.isTrue(dataPublicacao != null && dataPublicacao.compareTo(LocalDate.now()) >= 0, "Data de publicação não pode ser nulo e preciser ser no futuro");
+        Assert.isTrue(StringUtils.hasText(titulo), "Título não pode ser nulo ou em branco");
+        Assert.isTrue(StringUtils.hasText(resumo), "Resumo não pode ser nulo ou em branco");
+        Assert.isTrue(StringUtils.hasText(sumario), "Sumário não pode ser nulo ou em branco");
+        Assert.isTrue(Objects.nonNull(preco) && preco.doubleValue() > 0, "Preço não pode ser nulo e ser menor que zero");
+        Assert.isTrue(Objects.nonNull(numeroPaginas) && numeroPaginas > 0, "Número de páginas não pode ser nulo e ser menor que zero");
+        Assert.isTrue(StringUtils.hasText(isbn), "ISBN não pode ser nulo ou em branco");
+        Assert.isTrue(Objects.nonNull(dataPublicacao) && dataPublicacao.compareTo(LocalDate.now()) >= 0, "Data de publicação não pode ser nulo e preciser ser no futuro");
         Assert.notNull(categoria, "Categoria não pode ser nulo");
         Assert.notNull(autor, "Autor não pode ser nulo");
         

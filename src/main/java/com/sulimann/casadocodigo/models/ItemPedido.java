@@ -2,6 +2,7 @@ package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -33,8 +34,8 @@ public class ItemPedido implements Serializable{
 
     public ItemPedido(Livro livro, Integer quantidade, BigDecimal preco) {
         Assert.notNull(livro, "Livro não pode ser nulo");
-        Assert.isTrue(quantidade != null && quantidade > 0, "Quantidade não pode ser nulo ou menor que zero");
-        Assert.isTrue(preco != null && preco.doubleValue() > 0, "Preço não pode ser nulo ou menor que zero");
+        Assert.isTrue(Objects.nonNull(quantidade) && quantidade > 0, "Quantidade não pode ser nulo ou menor que zero");
+        Assert.isTrue(Objects.nonNull(preco) && preco.doubleValue() > 0, "Preço não pode ser nulo ou menor que zero");
 
         this.livro = livro;
         this.quantidade = quantidade;

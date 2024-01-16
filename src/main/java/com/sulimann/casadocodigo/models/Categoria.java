@@ -1,6 +1,7 @@
 package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.sulimann.casadocodigo.utils.TableName;
 
@@ -37,7 +39,7 @@ public class Categoria implements Serializable{
     }
     
     public Categoria(String nome){
-        Assert.isTrue(nome != null && !nome.isBlank(), "Nome não pode ser nulo ou em branco");
+        Assert.isTrue(StringUtils.hasText(nome), "Nome não pode ser nulo ou em branco");
         this.nome = nome;
     }
     

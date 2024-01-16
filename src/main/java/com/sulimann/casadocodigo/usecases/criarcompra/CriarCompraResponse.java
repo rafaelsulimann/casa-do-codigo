@@ -2,6 +2,8 @@ package com.sulimann.casadocodigo.usecases.criarcompra;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -47,8 +49,8 @@ public class CriarCompraResponse implements Serializable{
         this.cep = entity.getCep();
         this.dataCompra = entity.getDataCompra();
         this.pais = entity.getPais().getNome();
-        this.estado = entity.getEstado() != null ? entity.getEstado().getNome() : null;
-        this.cupom = entity.getCupom() != null ? new CupomDescontoAplicadoResponseInCriarCompra(entity.getCupom()) : null;
+        this.estado = Objects.nonNull(entity.getEstado()) ? entity.getEstado().getNome() : null;
+        this.cupom = Objects.nonNull(entity.getCupom()) ? new CupomDescontoAplicadoResponseInCriarCompra(entity.getCupom()) : null;
         this.pedido = new PedidoResponseInCriarCompra(entity.getPedido());
     }
 

@@ -57,7 +57,7 @@ public class Pedido implements Serializable {
     }
 
     private BigDecimal obterTotal() {
-        return itens.stream().map(ItemPedido::getSubTotal).reduce(BigDecimal.ZERO,BigDecimal::add);
+        return this.itens.stream().map(ItemPedido::getSubTotal).reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
     public boolean totalIgual(BigDecimal totalInformado){

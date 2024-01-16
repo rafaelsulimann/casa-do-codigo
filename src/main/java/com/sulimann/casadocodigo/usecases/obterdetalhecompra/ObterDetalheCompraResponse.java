@@ -2,6 +2,7 @@ package com.sulimann.casadocodigo.usecases.obterdetalhecompra;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -48,9 +49,9 @@ public class ObterDetalheCompraResponse implements Serializable{
         this.cep = entity.getCep();
         this.dataCompra = entity.getDataCompra();
         this.pais = entity.getPais().getNome();
-        this.estado = entity.getEstado() != null ? entity.getEstado().getNome() : null;
+        this.estado = Objects.nonNull(entity.getEstado()) ? entity.getEstado().getNome() : null;
         this.pedido = new PedidoResponseInObterDetalheCompra(entity.getPedido());
-        this.cupom = entity.getCupom() != null ? new CupomAplicadoResponseInObterDetalheCompra(entity.getCupom()) : null;
+        this.cupom = Objects.nonNull(entity.getCupom()) ? new CupomAplicadoResponseInObterDetalheCompra(entity.getCupom()) : null;
     }
 
 }
