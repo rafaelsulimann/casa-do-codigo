@@ -34,15 +34,15 @@ public class CupomDescontoAplicado implements Serializable{
     public CupomDescontoAplicado(){
     }
 
-    public CupomDescontoAplicado(CupomDesconto entity){
-        Assert.isTrue(Objects.nonNull(entity) && Objects.nonNull(entity.getPercentual()) && Objects.nonNull(entity.getValidade()) && Objects.nonNull(entity.getCodigo()), "Cupom de desconto não pode ser nulo");
-        Assert.isTrue(entity.getPercentual().doubleValue() > 0, "Percentual de desconto não pode ser nulo e precisa ser maior que zero");
-        Assert.isTrue(entity.getValidade().atTime(00, 01).compareTo(LocalDate.now().atTime(00, 00)) >= 0, "Valida precisa ser no futuro");
+    public CupomDescontoAplicado(CupomDesconto cupomDesconto){
+        Assert.isTrue(Objects.nonNull(cupomDesconto) && Objects.nonNull(cupomDesconto.getPercentual()) && Objects.nonNull(cupomDesconto.getValidade()) && Objects.nonNull(cupomDesconto.getCodigo()), "Cupom de desconto não pode ser nulo");
+        Assert.isTrue(cupomDesconto.getPercentual().doubleValue() > 0, "Percentual de desconto não pode ser nulo e precisa ser maior que zero");
+        Assert.isTrue(cupomDesconto.isValido(), "Valida precisa ser no futuro");
 
-        this.cupom = entity;
-        this.codigo = entity.getCodigo();
-        this.percentual = entity.getPercentual();
-        this.validade = entity.getValidade();
+        this.cupom = cupomDesconto;
+        this.codigo = cupomDesconto.getCodigo();
+        this.percentual = cupomDesconto.getPercentual();
+        this.validade = cupomDesconto.getValidade();
     }
 
 }

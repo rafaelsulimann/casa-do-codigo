@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.models.Estado;
 import com.sulimann.casadocodigo.models.Pais;
 import com.sulimann.casadocodigo.utils.ErrorMessage;
@@ -28,6 +30,7 @@ public class CriarEstadoRequest implements Serializable{
     private Long paisId;
 
     public Estado toModel(EntityManager manager) {
+        Assert.notNull(manager, "Entity Manager não pode ser nulo");
         Pais pais = manager.find(Pais.class, this.paisId);
         return new Estado(this.nome, pais);
     }

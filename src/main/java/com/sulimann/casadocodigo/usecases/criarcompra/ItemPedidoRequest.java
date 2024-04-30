@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.models.ItemPedido;
 import com.sulimann.casadocodigo.models.Livro;
 import com.sulimann.casadocodigo.utils.ErrorMessage;
@@ -27,6 +29,7 @@ public class ItemPedidoRequest implements Serializable{
     private Integer quantidade;
 
     public ItemPedido toModel(EntityManager manager) {
+        Assert.notNull(manager,"Entity Manager não poder ser nulo");
         Livro livro = manager.find(Livro.class, this.livroId);
         return new ItemPedido(livro, this.quantidade, livro.getPreco());
     }

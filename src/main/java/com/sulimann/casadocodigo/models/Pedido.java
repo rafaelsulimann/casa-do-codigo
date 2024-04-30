@@ -2,6 +2,7 @@ package com.sulimann.casadocodigo.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -48,7 +49,7 @@ public class Pedido implements Serializable {
     }
 
     public Pedido(Set<ItemPedido> itens, Compra compra) {
-        Assert.isTrue(!itens.isEmpty(), "Lista de Itens não pode ser vazia");
+        Assert.isTrue(Objects.nonNull(itens) && !itens.isEmpty(), "Lista de Itens não pode ser vazia");
         Assert.notNull(compra, "Compra não pode ser nulo");
 
         this.itens = itens;

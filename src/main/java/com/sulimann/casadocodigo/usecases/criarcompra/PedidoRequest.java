@@ -37,7 +37,7 @@ public class PedidoRequest implements Serializable{
     private Set<ItemPedidoRequest> itens;
 
     public Function<Compra, Pedido> toModel(EntityManager manager) {
-        Assert.isTrue(Objects.nonNull(manager), "Manager não pode ser nulo");
+        Assert.notNull(manager, "Manager não pode ser nulo");
         return compra -> {
             Set<ItemPedido> itensPedido = this.montaItensPedido(manager);
             return new Pedido(itensPedido, compra);
@@ -45,7 +45,7 @@ public class PedidoRequest implements Serializable{
     }
 
     public Set<ItemPedido> montaItensPedido(EntityManager manager) {
-        Assert.isTrue(Objects.nonNull(manager), "Manager não pode ser nulo");
+        Assert.notNull(manager, "Manager não pode ser nulo");
         return this.itens.stream().map(item -> item.toModel(manager)).collect(Collectors.toSet());
     }
 

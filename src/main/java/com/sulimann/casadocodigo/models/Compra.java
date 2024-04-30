@@ -106,10 +106,10 @@ public class Compra implements Serializable{
         this.estado = estado;
     }
 
-    public void aplicaCupomDesconto(CupomDesconto cupomEntity) {
-        Assert.isTrue(Objects.nonNull(cupomEntity) && cupomEntity.getValidade().atTime(00, 01).compareTo(LocalDate.now().atTime(00, 00)) >= 0, "Cupom de desconto não pode ser nulo e validade precisa ser no futuro");
+    public void aplicaCupomDesconto(CupomDesconto cupomDesconto) {
+        Assert.isTrue(Objects.nonNull(cupomDesconto) && cupomDesconto.isValido(), "Cupom de desconto não pode ser nulo e validade precisa ser no futuro");
         Assert.isTrue(Objects.isNull(this.cupom), "Não é possível aplicar um cupom de desconto em uma compra que ja foi efetuada");
-        this.cupom = new CupomDescontoAplicado(cupomEntity);
+        this.cupom = new CupomDescontoAplicado(cupomDesconto);
         this.pedido.aplicaDesconto(cupom);
     }
 

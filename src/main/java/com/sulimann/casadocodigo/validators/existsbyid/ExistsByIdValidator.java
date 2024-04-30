@@ -1,5 +1,7 @@
 package com.sulimann.casadocodigo.validators.existsbyid;
 
+import java.util.Objects;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -22,7 +24,7 @@ public class ExistsByIdValidator implements ConstraintValidator<ExistsById, Obje
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if(value == null){
+        if(Objects.isNull(value)){
             return true;
         }
         Query query = this.manager.createQuery("SELECT 1 FROM " + this.klass.getName() + " WHERE " + this.domainAttribute + "=:value");

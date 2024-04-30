@@ -56,7 +56,7 @@ public class CupomDesconto implements Serializable{
     }
 
     public boolean isValido() {
-        return this.validade.atTime(00,01).compareTo(LocalDate.now().atTime(00, 00)) <= 0;
+        return this.validade.atTime(00,01).compareTo(LocalDate.now().atTime(00, 00)) >= 0;
     }
     
 }

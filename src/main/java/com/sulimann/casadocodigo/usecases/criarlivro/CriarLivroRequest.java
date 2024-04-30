@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.util.Assert;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.casadocodigo.models.Autor;
 import com.sulimann.casadocodigo.models.Categoria;
@@ -63,6 +65,7 @@ public class CriarLivroRequest implements Serializable{
     private Long autorId;
 
     public Livro toModel(EntityManager manager) {
+        Assert.notNull(manager, "Entity Manager não pode ser nulo");
         Categoria categoria = manager.find(Categoria.class, this.categoriaId);
         Autor autor = manager.find(Autor.class, this.autorId);
 

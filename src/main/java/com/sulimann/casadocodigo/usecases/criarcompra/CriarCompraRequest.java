@@ -10,6 +10,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.util.Assert;
+
 import com.sulimann.casadocodigo.models.Compra;
 import com.sulimann.casadocodigo.models.CupomDesconto;
 import com.sulimann.casadocodigo.models.Estado;
@@ -75,6 +77,9 @@ public class CriarCompraRequest implements Serializable{
 
 
     public Compra toModel(EntityManager manager, CupomDescontoRepository cupomDescontoRepository) {
+        Assert.notNull(manager, "Entity Manager não pode ser nulo");
+        Assert.notNull(cupomDescontoRepository, "CupomDescontoRepository não pode ser nulo");
+
         Pais pais = manager.find(Pais.class, this.paisId);
 
         Function<Compra, Pedido> criaPedido = this.pedido.toModel(manager);
